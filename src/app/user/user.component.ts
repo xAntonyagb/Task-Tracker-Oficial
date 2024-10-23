@@ -1,49 +1,27 @@
 import { Component } from '@angular/core';
+import {DUMMY_USERS} from './dummy-users';
+import {NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [],
+  imports: [
+    NgForOf
+  ],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
 export class UserComponent {
+  users = DUMMY_USERS;
 
-}
-export const DUMMY_USERS = [
-  {
-    id: 'u1',
-    name: 'Maria Silva',
-    avatar: 'user-1.jpg',
-  },
-  {
-    id: 'u2',
-    name: 'Catarina Morgado',
-    avatar: 'user-2.jpg',
-  },
-  {
-    id: 'u3',
-    name: 'Marcos Paulo',
-    avatar: 'user-3.jpg',
-  },
-  {
-    id: 'u4',
-    name: 'José Moura',
-    avatar: 'user-4.jpg',
-  },
-  {
-    id: 'u5',
-    name: 'Carla Souza',
-    avatar: 'user-5.jpg',
-  },
-  {
-    id: 'u6',
-    name: 'Arthur Vale',
-    avatar: 'user-6.jpg',
-  },
-  {
-    id: 'u7',
-    name: 'Pedro Careca',
-    avatar: 'user-1.jpg',
+  shuffleUsers() {
+    for (let i = this.users.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.users[i], this.users[j]] = [this.users[j], this.users[i]];
+    }
   }
-];
+
+  onSelectUser() {
+    this.shuffleUsers();
+  }
+}
