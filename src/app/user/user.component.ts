@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import {DUMMY_USERS} from './dummy-users';
+import {Component, Input} from '@angular/core';
 import {NgForOf} from '@angular/common';
 
 @Component({
@@ -12,16 +11,11 @@ import {NgForOf} from '@angular/common';
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  users = DUMMY_USERS;
-
-  shuffleUsers() {
-    for (let i = this.users.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [this.users[i], this.users[j]] = [this.users[j], this.users[i]];
-    }
-  }
+  @Input({required: true}) id!: string;
+  @Input({required: true}) avatar!: string;
+  @Input({required: true}) name!: string;
 
   onSelectUser() {
-    this.shuffleUsers();
   }
 }
+
