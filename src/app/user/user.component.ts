@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgForOf} from '@angular/common';
 
 @Component({
@@ -15,7 +15,11 @@ export class UserComponent {
   @Input({required: true}) avatar!: string;
   @Input({required: true}) name!: string;
 
+  @Output() select = new EventEmitter<any>();
+
   onSelectUser() {
+    const selectedUser = {id: this.id, name: this.name, avatar: this.avatar};
+    this.select.emit(selectedUser);
   }
 }
 

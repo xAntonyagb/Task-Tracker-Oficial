@@ -5,9 +5,11 @@
       <app-user [id]="user.id"
                 [name]="user.name"
                 [avatar]="user.avatar"
-      ></app-user>
+                (select)="onSelectUser($event)">
+      </app-user>
     </li>
   </ul>
+  <app-task [user]="selectedUser"></app-task>
   <h1>Main Principal</h1>
 </main>
 <router-outlet />
